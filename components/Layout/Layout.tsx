@@ -23,7 +23,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col justify-between items-center min-h-screen">
+      <main className="flex flex-col min-h-screen">
         <Header />
         {children}
         <Footer />

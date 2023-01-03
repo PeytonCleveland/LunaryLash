@@ -47,6 +47,9 @@ const Header = () => {
                 {link.label}
               </Link>
             ))}
+            <button className="bg-white text-[#2a2b2a] text-xl px-6 py-2.5 rounded-tl-xl rounded-br-xl">
+              Book Online
+            </button>
           </nav>
         </div>
       </div>
