@@ -1,3 +1,5 @@
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -5,7 +7,12 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      fontFamily: {
+        primary: ["var(--unbounded-font)", ...fontFamily.sans],
+        serif: ["var(--unbounded-font)", ...fontFamily.serif],
+      },
+    },
   },
   plugins: [],
 };

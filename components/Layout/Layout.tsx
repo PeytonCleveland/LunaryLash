@@ -1,6 +1,11 @@
 import { FC } from "react";
 import { Header, Footer } from "../index";
 import Head from "next/head";
+import { Bodoni_Moda } from "@next/font/google";
+
+const bodoni = Bodoni_Moda({
+  variable: "--bodoni-font",
+});
 
 interface LayoutProps {
   children: React.ReactNode;
@@ -23,11 +28,13 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <main className="flex flex-col min-h-screen">
-        <Header />
-        {children}
-        <Footer />
-      </main>
+      <div className={bodoni.variable}>
+        <main className="flex flex-col min-h-screen">
+          <Header />
+          {children}
+          <Footer />
+        </main>
+      </div>
     </>
   );
 };

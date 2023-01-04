@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from "next/router";
 import links from "./links";
 
@@ -15,7 +16,7 @@ const Header = () => {
   }, [router.pathname]);
 
   return (
-    <header className="w-full py-4 px-4 bg-[#2a2b2a] z-50">
+    <header className="w-full py-5 px-8 z-50 fixed top-0 left-0 bg-white">
       <div className={mobileNavStyles}>
         <div className="container mx-auto flex flex-col items-end">
           <div className="flex justify-between items-center w-full">
@@ -55,20 +56,25 @@ const Header = () => {
       </div>
 
       <div className="container mx-auto flex justify-between items-center">
-        <h1 className="text-white">Lunary Lash</h1>
+        <div className="flex items-center gap-3">
+          <Image src="/moon.png" alt="Logo" width={30} height={30} />
+          <h1 className="text-[#2a2b2a] font-semibold font-primary">
+            Lunary Lash
+          </h1>
+        </div>
         <button className="focus:outline-none" onClick={() => setIsOpen(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 24 24"
             strokeWidth={1.5}
-            stroke="white"
-            className="w-10 h-10"
+            stroke="currentColor"
+            className="w-9 h-9"
           >
             <path
               strokeLinecap="round"
               strokeLinejoin="round"
-              d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
+              d="M3.75 9h16.5m-16.5 6.75h16.5"
             />
           </svg>
         </button>
