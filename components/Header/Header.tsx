@@ -7,8 +7,8 @@ import links from "./links";
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
   const mobileNavStyles = isOpen
-    ? "w-screen h-screen bg-[#2a2b2a] fixed top-0 right-0 transition-all duration-500 ease-in-out p-4"
-    : "w-screen h-screen bg-[#2a2b2a] fixed top-0 -right-full transition-all duration-500 ease-in-out p-4";
+    ? "w-screen h-screen bg-[#2a2b2a] fixed top-0 right-0 transition-all duration-500 ease-in-out py-5 px-8"
+    : "w-screen h-screen bg-[#2a2b2a] fixed top-0 -right-full transition-all duration-500 ease-in-out py-5 px-8";
   const router = useRouter();
 
   useEffect(() => {
@@ -20,7 +20,12 @@ const Header = () => {
       <div className={mobileNavStyles}>
         <div className="container mx-auto flex flex-col items-end">
           <div className="flex justify-between items-center w-full">
-            <h1 className="text-white">Menu</h1>
+            <div className="flex items-center gap-3">
+              <Image src="/moon-white.png" alt="Logo" width={30} height={30} />
+              <h1 className="text-white font-semibold font-primary">
+                Lunary Lash
+              </h1>
+            </div>
             <button
               className="focus:outline-none"
               onClick={() => setIsOpen(false)}
@@ -42,14 +47,28 @@ const Header = () => {
             </button>
           </div>
 
-          <nav className="flex flex-col gap-4 w-full text-white text-3xl mt-8">
+          <nav className="flex flex-col gap-4 w-full text-white text-3xl mt-10 font-primary">
             {links.map((link) => (
               <Link href={link.href} key={link.href}>
                 {link.label}
               </Link>
             ))}
-            <button className="bg-white text-[#2a2b2a] text-xl px-6 py-2.5 rounded-tl-xl rounded-br-xl">
-              Book Online
+            <button className="bg-white text-[#2a2b2a] px-6 py-5 flex justify-between items-center font-primary text-base mt-2">
+              Book appointment
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="#2a2b2a"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                />
+              </svg>
             </button>
           </nav>
         </div>

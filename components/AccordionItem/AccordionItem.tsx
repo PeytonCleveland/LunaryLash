@@ -13,11 +13,11 @@ const AccordionItem: FC<AccordionItemProps> = ({
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div
-      className="w-full flex flex-col gap-1 py-3 border-t border-white"
+      className="w-full flex flex-col gap-1 py-4 border-t border-white"
       {...props}
     >
       <button
-        className="flex text-white text-lg font-semibold justify-between items-center"
+        className="flex text-white justify-between items-center font-primary"
         onClick={() => setIsOpen(!isOpen)}
       >
         {title}
