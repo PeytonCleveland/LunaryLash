@@ -135,12 +135,12 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full px-4 py-16 flex justify-center">
-        <div className="container mx-auto flex flex-col gap-6">
+      <section className="w-full px-8 py-16 flex justify-center">
+        <div className="container mx-auto flex flex-col items-center gap-6">
           <h1 className="text-[#2a2b2a] text-3xl font-primary text-center">
             About Lunary
           </h1>
-          <div className="w-full h-[360px] relative overflow-hidden rounded-full border-[8px] border-[#2a2b2a]">
+          <div className="w-[300px] h-[300px] relative overflow-hidden rounded-full border-[8px] border-[#2a2b2a]">
             <Image
               src="/hero.jpg"
               layout="fill"
@@ -152,12 +152,12 @@ export default function Home() {
             {/* <div className="absolute w-[80px] h-[125px] border-l-2 border-b-2 border-[#2a2b2a] -bottom-3 -left-3" />
             <div className="absolute h-[150px] border-r-2 border-[#2a2b2a] -top-8 -right-3" />
             <div className="absolute w-[100px] border-t-2 border-[#2a2b2a] -top-3 -right-12" /> */}
-          </div>{" "}
+          </div>
           <p className="text-[#2a2b2a] text-center">
             Welcome to Lunary Lash, the premier lash tech company for all of
             your eyelash extension and lash lift needs. We use only the highest
           </p>
-          <button className="bg-[#2a2b2a] text-white px-6 py-5 flex justify-between items-center font-primary">
+          <button className="bg-[#2a2b2a] text-white px-6 py-5 flex justify-between items-center font-primary w-full">
             Learn more
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -177,7 +177,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full px-4 py-12 flex justify-center bg-[#2a2b2a]">
+      <section className="w-full px-8 py-16 flex justify-center bg-[#2a2b2a]">
         <div className="container mx-auto flex flex-col gap-6">
           <h1 className="text-white text-3xl font-primary">
             Frequently Asked Questions
@@ -199,10 +199,10 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full px-4 py-16 flex justify-center">
+      <section className="w-full px-8 py-16 flex justify-center">
         <div className="container mx-auto flex flex-col gap-4">
           <h1 className="text-[#2a2b2a] text-3xl">Client Photos</h1>
-          <div className="w-full h-[275px] bg-gray-400 rounded-tl-3xl rounded-br-3xl relative">
+          <div className="w-full h-[275px] bg-gray-400 relative">
             <button>
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -239,21 +239,21 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="w-full px-4 pt-2 pb-16 flex justify-center">
-        <div className="container mx-auto flex flex-col gap-2.5 bg-[#2a2b2a] p-6 rounded-tl-xl rounded-br-xl">
-          <h1 className="text-white text-3xl font-semibold">
+      <section className="w-full px-8 pt-2 pb-16 flex justify-center">
+        <div className="container mx-auto flex flex-col gap-2.5 bg-[#2a2b2a] p-6">
+          <h1 className="text-white text-2xl font-semibold text-center font-primary">
             Sign up to save!
           </h1>
-          <p className="text-gray-300 font-light">
+          <p className="text-gray-300 font-light text-center mb-2 text-sm">
             Join our mailing list to receive exclusive offers and updates on new
             services!
           </p>
           <input
             type="text"
             placeholder="Email Address"
-            className="bg-white rounded-lg px-4 py-2.5 w-full mt-1.5"
+            className="bg-white px-4 py-2.5 w-full mt-1.5"
           />
-          <button className="bg-[#baa7b0] text-[#2a2b2a] text-xl px-6 py-2.5 rounded-lg font-semibold">
+          <button className="bg-[#baa7b0] text-[#2a2b2a] text-xl px-6 py-2.5 font-semibold font-primary">
             Sign Up
           </button>
         </div>
