@@ -160,23 +160,25 @@ export default function Home() {
             Welcome to Lunary Lash, the premier lash tech company for all of
             your eyelash extension and lash lift needs. We use only the highest
           </p>
-          <button className="bg-[#2a2b2a] text-white px-6 py-5 flex justify-between items-center font-primary w-full">
-            Learn more
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2.5}
-              stroke="white"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </button>
+          <Link href="/about" passHref legacyBehavior>
+            <a className="bg-[#2a2b2a] text-white px-6 py-5 flex justify-between items-center font-primary w-full">
+              Learn more
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="white"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                />
+              </svg>
+            </a>
+          </Link>
         </div>
       </section>
 

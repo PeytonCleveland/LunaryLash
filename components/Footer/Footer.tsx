@@ -10,9 +10,9 @@ const Footer = () => {
             Lunary Lash
           </h1>
         </div>
-        <div className="flex w-full items-center justify-between gap-2">
+        <div className="flex w-full justify-between gap-2">
           <div className="flex flex-col gap-2">
-            <p className="text-white font-primary text-sm">Contact Us</p>
+            <p className="text-white font-primary text-sm">Contact</p>
             <a
               href="tel:3342244248"
               className="text-white font-primary font-light text-xs"
@@ -26,15 +26,18 @@ const Footer = () => {
               morgan@lunarylash.com
             </a>
           </div>
-          <div className="flex flex-col items-center gap-2">
-            <p className="text-white font-primary text-xs">Follow Us</p>
-            <div className="flex items-center gap-2">
-              <Image src="/ig.png" alt="Logo" width={31} height={31} />
-              <Image src="/fb.png" alt="Logo" width={30} height={30} />
-              <Image src="/tiktok.png" alt="Logo" width={30} height={30} />
+          <div className="flex flex-col gap-2">
+            <p className="text-white font-primary text-sm">Follow</p>
+            <div className="flex items-center gap-2.5">
+              <Image src="/ig.png" alt="Logo" width={28} height={28} />
+              <Image src="/fb.png" alt="Logo" width={27} height={27} />
+              <Image src="/tiktok.png" alt="Logo" width={27} height={27} />
             </div>
           </div>
         </div>
+        <p className="text-white font-primary font-light text-xs mt-4">
+          © 2021 All Rights Reserved
+        </p>
       </div>
     </footer>
   );

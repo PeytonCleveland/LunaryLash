@@ -84,7 +84,7 @@ const Header = () => {
       <div className="container mx-auto flex justify-between items-center">
         <Link href="/" passHref legacyBehavior>
           <a className="flex items-center gap-3">
-            <Image src="/moon.png" alt="Logo" width={30} height={30} />
+            <Image src="/moon.png" alt="Logo" width={30} height={30} priority />
             <h1 className="text-[#2a2b2a] font-semibold font-primary">
               Lunary Lash
             </h1>
