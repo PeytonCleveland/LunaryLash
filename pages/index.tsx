@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { Accordion, AccordionItem } from "../components";
 
 export default function Home() {
@@ -28,23 +29,25 @@ export default function Home() {
             <div className="absolute h-[150px] border-r-2 border-[#2a2b2a] -top-8 -right-3" />
             <div className="absolute w-[100px] border-t-2 border-[#2a2b2a] -top-3 -right-12" /> */}
           </div>
-          <button className="bg-[#2a2b2a] text-white px-6 py-5 flex justify-between items-center font-primary">
-            Book appointment
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={2.5}
-              stroke="white"
-              className="w-6 h-6"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
-              />
-            </svg>
-          </button>
+          <Link href="/appointments" passHref legacyBehavior>
+            <a className="bg-[#2a2b2a] text-white px-6 py-5 flex justify-between items-center font-primary">
+              Book appointment
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                strokeWidth={2.5}
+                stroke="white"
+                className="w-6 h-6"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                />
+              </svg>
+            </a>
+          </Link>
         </div>
       </section>
 
@@ -195,6 +198,7 @@ export default function Home() {
               title="What is an eyelash extension?"
               subtitle="Idk"
             />
+            <AccordionItem title="Who do you love?" subtitle="P ❤️" />
           </Accordion>
         </div>
       </section>

@@ -1,8 +1,40 @@
+import Image from "next/image";
+
 const Footer = () => {
   return (
-    <footer className="bg-[#2a2b2a] px-4 py-6">
-      <div className="container mx-auto flex justify-center gap-4">
-        <p className="text-white">© 2023 Lunary Lash</p>
+    <footer className="bg-[#2a2b2a] px-8 py-8">
+      <div className="container mx-auto flex flex-col justify-between items-center gap-8">
+        <div className="flex items-center gap-3">
+          <Image src="/moon-white.png" alt="Logo" width={34} height={34} />
+          <h1 className="text-white font-semibold font-primary text-lg">
+            Lunary Lash
+          </h1>
+        </div>
+        <div className="flex w-full items-center justify-between gap-2">
+          <div className="flex flex-col gap-2">
+            <p className="text-white font-primary text-sm">Contact Us</p>
+            <a
+              href="tel:3342244248"
+              className="text-white font-primary font-light text-xs"
+            >
+              334.224.4248
+            </a>
+            <a
+              href="mailto:morgan@lunarylash.com"
+              className="text-white font-primary font-light text-xs"
+            >
+              morgan@lunarylash.com
+            </a>
+          </div>
+          <div className="flex flex-col items-center gap-2">
+            <p className="text-white font-primary text-xs">Follow Us</p>
+            <div className="flex items-center gap-2">
+              <Image src="/ig.png" alt="Logo" width={31} height={31} />
+              <Image src="/fb.png" alt="Logo" width={30} height={30} />
+              <Image src="/tiktok.png" alt="Logo" width={30} height={30} />
+            </div>
+          </div>
+        </div>
       </div>
     </footer>
   );

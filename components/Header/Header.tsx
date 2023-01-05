@@ -20,12 +20,19 @@ const Header = () => {
       <div className={mobileNavStyles}>
         <div className="container mx-auto flex flex-col items-end">
           <div className="flex justify-between items-center w-full">
-            <div className="flex items-center gap-3">
-              <Image src="/moon-white.png" alt="Logo" width={30} height={30} />
-              <h1 className="text-white font-semibold font-primary">
-                Lunary Lash
-              </h1>
-            </div>
+            <Link href="/" passHref legacyBehavior>
+              <a className="flex items-center gap-3">
+                <Image
+                  src="/moon-white.png"
+                  alt="Logo"
+                  width={30}
+                  height={30}
+                />
+                <h1 className="text-white font-semibold font-primary">
+                  Lunary Lash
+                </h1>
+              </a>
+            </Link>
             <button
               className="focus:outline-none"
               onClick={() => setIsOpen(false)}
@@ -75,12 +82,14 @@ const Header = () => {
       </div>
 
       <div className="container mx-auto flex justify-between items-center">
-        <div className="flex items-center gap-3">
-          <Image src="/moon.png" alt="Logo" width={30} height={30} />
-          <h1 className="text-[#2a2b2a] font-semibold font-primary">
-            Lunary Lash
-          </h1>
-        </div>
+        <Link href="/" passHref legacyBehavior>
+          <a className="flex items-center gap-3">
+            <Image src="/moon.png" alt="Logo" width={30} height={30} />
+            <h1 className="text-[#2a2b2a] font-semibold font-primary">
+              Lunary Lash
+            </h1>
+          </a>
+        </Link>
         <button className="focus:outline-none" onClick={() => setIsOpen(true)}>
           <svg
             xmlns="http://www.w3.org/2000/svg"
