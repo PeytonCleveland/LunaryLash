@@ -36,7 +36,7 @@ const Footer = () => {
           </div>
         </div>
         <p className="text-white font-primary font-light text-xs mt-4">
-          © 2021 All Rights Reserved
+          © 2023 All Rights Reserved
         </p>
       </div>
     </footer>

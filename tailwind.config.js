@@ -10,7 +10,11 @@ module.exports = {
     extend: {
       fontFamily: {
         primary: ["var(--unbounded-font)", ...fontFamily.sans],
-        serif: ["var(--unbounded-font)", ...fontFamily.serif],
+        secondary: ["var(--alegreya-sans-font)", ...fontFamily.sans],
+        "secondary-bold": [
+          "var(--alegreya-sans-font-bold)",
+          ...fontFamily.sans,
+        ],
       },
     },
   },

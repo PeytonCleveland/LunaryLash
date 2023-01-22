@@ -1,8 +1,20 @@
+import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Accordion, AccordionItem } from "../components";
 
 export default function Home() {
+  const [photo, setPhoto] = useState(0);
+
+  const changePhoto = (index: number) => {
+    if (index === -1 && photo !== 0) {
+      setPhoto(photo - 1);
+    }
+    if (index === 1 && photo !== 2) {
+      setPhoto(photo + 1);
+    }
+  };
+
   return (
     <>
       <section className="w-full px-8 pt-24 pb-12 flex justify-center">
@@ -25,9 +37,6 @@ export default function Home() {
               alt="Hero image"
               priority
             />
-            {/* <div className="absolute w-[80px] h-[125px] border-l-2 border-b-2 border-[#2a2b2a] -bottom-3 -left-3" />
-            <div className="absolute h-[150px] border-r-2 border-[#2a2b2a] -top-8 -right-3" />
-            <div className="absolute w-[100px] border-t-2 border-[#2a2b2a] -top-3 -right-12" /> */}
           </div>
           <Link href="/appointments" passHref legacyBehavior>
             <a className="bg-[#2a2b2a] text-white px-6 py-5 flex justify-between items-center font-primary">
@@ -152,9 +161,6 @@ export default function Home() {
               alt="Hero image"
               priority
             />
-            {/* <div className="absolute w-[80px] h-[125px] border-l-2 border-b-2 border-[#2a2b2a] -bottom-3 -left-3" />
-            <div className="absolute h-[150px] border-r-2 border-[#2a2b2a] -top-8 -right-3" />
-            <div className="absolute w-[100px] border-t-2 border-[#2a2b2a] -top-3 -right-12" /> */}
           </div>
           <p className="text-[#2a2b2a] text-center">
             Welcome to Lunary Lash, the premier lash tech company for all of
@@ -208,15 +214,39 @@ export default function Home() {
       <section className="w-full px-8 py-16 flex justify-center">
         <div className="container mx-auto flex flex-col gap-4">
           <h1 className="text-[#2a2b2a] text-3xl">Client Photos</h1>
-          <div className="w-full h-[275px] bg-gray-400 relative">
-            <button>
+          {photo === 0 ? (
+            <div className="w-full h-[275px] relative border-4 border-[#baa7b0] bg-[#2a2b2a]">
+              <Image
+                src="/hybrid-2.jpg"
+                layout="fill"
+                objectFit="contain"
+                objectPosition="center"
+                alt="Hybrid set"
+              />
+            </div>
+          ) : (
+            <div className="w-full h-[275px] relative border-4 border-[#baa7b0]">
+              <Image
+                src="/hybrid-3.jpg"
+                layout="fill"
+                objectFit="contain"
+                objectPosition="center"
+                alt="Hybrid set"
+              />
+            </div>
+          )}
+          <div className="w-full flex items-center gap-4">
+            <button
+              className="flex flex-1 justify-center items-center py-3 bg-[#baa7b0]"
+              onClick={() => changePhoto(-1)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2.5}
                 stroke="currentColor"
-                className="w-10 h-10 absolute left-0 bottom-6 text-[#2a2b2a] ml-4 bg-white rounded-full p-2 pl-1.5"
+                className="w-6 h-6"
               >
                 <path
                   strokeLinecap="round"
@@ -225,14 +255,18 @@ export default function Home() {
                 />
               </svg>
             </button>
-            <button>
+
+            <button
+              className="flex flex-1 justify-center items-center py-3 bg-[#baa7b0]"
+              onClick={() => changePhoto(1)}
+            >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 24 24"
                 strokeWidth={2.5}
                 stroke="currentColor"
-                className="w-10 h-10 absolute right-0 bottom-6 text-[#2a2b2a] mr-4 bg-white rounded-full p-2 pr-1.5"
+                className="w-6 h-6"
               >
                 <path
                   strokeLinecap="round"
