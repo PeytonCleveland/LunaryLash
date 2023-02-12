@@ -61,11 +61,13 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ date, time, service }) => {
 
     setIsLoading(true);
 
+    const baseUrl = window.location.origin;
+
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `http://localhost:3000/confirmation?date=${date}&time=${time}&service=${service}&email=${email}`,
+        return_url: `${baseUrl}/confirmation?date=${date}&time=${time}&service=${service}&email=${email}`,
       },
     });
 
