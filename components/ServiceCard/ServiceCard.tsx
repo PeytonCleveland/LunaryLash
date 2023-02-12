@@ -26,7 +26,7 @@ const ServiceCard: FC<ServiceCardProps> = ({
     >
       <div className="flex flex-col items-start justify-center">
         <div className="flex items-center gap-2">
-          <h6 className="font-secondary-bold text-lg">{name}</h6>
+          <h6 className="font-primary font-semibold">{name}</h6>
           {selected && (
             <svg
               xmlns="http://www.w3.org/2000/svg"
@@ -45,9 +45,9 @@ const ServiceCard: FC<ServiceCardProps> = ({
           )}
         </div>
 
-        <p className="font-secondary text-gray-400">{duration}</p>
+        <p className="font-primary text-xs text-gray-400">{duration}</p>
       </div>
-      <h6 className="font-secondary-bold text-2xl">${price}</h6>
+      <h6 className="font-primary text-lg font-semibold">${price}</h6>
     </button>
   );
 };

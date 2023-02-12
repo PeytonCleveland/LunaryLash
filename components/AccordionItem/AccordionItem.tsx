@@ -17,7 +17,7 @@ const AccordionItem: FC<AccordionItemProps> = ({
       {...props}
     >
       <button
-        className="flex text-sm text-white justify-between items-center font-primary"
+        className="flex text-sm text-white justify-between items-center font-primary text-left"
         onClick={() => setIsOpen(!isOpen)}
       >
         {title}

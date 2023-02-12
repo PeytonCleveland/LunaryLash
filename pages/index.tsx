@@ -10,7 +10,7 @@ export default function Home() {
     if (index === -1 && photo !== 0) {
       setPhoto(photo - 1);
     }
-    if (index === 1 && photo !== 2) {
+    if (index === 1 && photo !== 4) {
       setPhoto(photo + 1);
     }
   };
@@ -93,25 +93,7 @@ export default function Home() {
             <div className="w-full flex flex-col">
               <div className="w-full h-[175px] relative">
                 <Image
-                  src="/hybrid.jpg"
-                  layout="fill"
-                  objectFit="cover"
-                  objectPosition="center"
-                  alt="Classic set"
-                />
-              </div>
-              <div className="w-full p-3 bg-white flex flex-col gap-3">
-                <div className="w-full flex justify-between">
-                  <h6 className="text-[#2a2b2a] font-primary">Volume Set</h6>
-                  <h6 className="text-[#2a2b2a] font-primary">$200</h6>
-                </div>
-              </div>
-            </div>
-
-            <div className="w-full flex flex-col">
-              <div className="w-full h-[175px] relative">
-                <Image
-                  src="/hybrid.jpg"
+                  src="/hybrid-3.jpg"
                   layout="fill"
                   objectFit="cover"
                   objectPosition="center"
@@ -122,6 +104,24 @@ export default function Home() {
                 <div className="w-full flex justify-between">
                   <h6 className="text-[#2a2b2a] font-primary">Hybrid Set</h6>
                   <h6 className="text-[#2a2b2a] font-primary">$175</h6>
+                </div>
+              </div>
+            </div>
+
+            <div className="w-full flex flex-col">
+              <div className="w-full h-[175px] relative">
+                <Image
+                  src="/volume.jpg"
+                  layout="fill"
+                  objectFit="cover"
+                  objectPosition="center"
+                  alt="Classic set"
+                />
+              </div>
+              <div className="w-full p-3 bg-white flex flex-col gap-3">
+                <div className="w-full flex justify-between">
+                  <h6 className="text-[#2a2b2a] font-primary">Volume Set</h6>
+                  <h6 className="text-[#2a2b2a] font-primary">$200</h6>
                 </div>
               </div>
             </div>
@@ -195,18 +195,21 @@ export default function Home() {
           </h1>
           <Accordion>
             <AccordionItem
-              title="What is an eyelash extension?"
-              subtitle="Idk"
+              title="What is your cancellation policy?"
+              subtitle="Lunary Lash has a 24 hour cancellation policy. If you cancel your appointment within 24 hours of your appointment time, you will be charged 50% of the service price. If you cancel your appointment within 12 hours of your appointment time, you will be charged 100% of the service price."
             />
             <AccordionItem
-              title="What is an eyelash extension?"
-              subtitle="Idk"
+              title="How long will my lash extensions last?"
+              subtitle="Lash extensions can last up to 4 weeks with proper care.  For best results, we recommend coming in every 2-3 weeks for a fill."
             />
             <AccordionItem
-              title="What is an eyelash extension?"
-              subtitle="Idk"
+              title="What is a lash lift?"
+              subtitle="A lash lift is a semi-permanent treatment that lifts and curls your natural lashes.  It is a great alternative to lash extensions for those who want to enhance their natural lashes.  A lash lift can last up to 6 weeks with proper care.  For best results, we recommend coming in every 4-6 weeks for a lift."
             />
-            <AccordionItem title="Who do you love?" subtitle="P ❤️" />
+            <AccordionItem
+              title="Where is Lunary Lash located?"
+              subtitle="Lunary Lash is an in-home studio located just minutes from the I-65 Millbrook/Prattville exit.  After booking an appointment you will receive a confirmation email with the address.  Check out our about page to take a virtual tour of the studio."
+            />
           </Accordion>
         </div>
       </section>
@@ -215,9 +218,39 @@ export default function Home() {
         <div className="container mx-auto flex flex-col gap-4">
           <h1 className="text-[#2a2b2a] text-3xl">Client Photos</h1>
           {photo === 0 ? (
-            <div className="w-full h-[275px] relative border-4 border-[#baa7b0] bg-[#2a2b2a]">
+            <div className="w-full h-[275px] relative border-4 border-[#baa7b0]">
               <Image
                 src="/hybrid-2.jpg"
+                layout="fill"
+                objectFit="contain"
+                objectPosition="center"
+                alt="Hybrid set"
+              />
+            </div>
+          ) : photo === 1 ? (
+            <div className="w-full h-[275px] relative border-4 border-[#baa7b0]">
+              <Image
+                src="/hybrid-3.jpg"
+                layout="fill"
+                objectFit="contain"
+                objectPosition="center"
+                alt="Hybrid set"
+              />
+            </div>
+          ) : photo === 2 ? (
+            <div className="w-full h-[275px] relative border-4 border-[#baa7b0]">
+              <Image
+                src="/hybrid.jpg"
+                layout="fill"
+                objectFit="contain"
+                objectPosition="center"
+                alt="Hybrid set"
+              />
+            </div>
+          ) : photo === 3 ? (
+            <div className="w-full h-[275px] relative border-4 border-[#baa7b0]">
+              <Image
+                src="/volume.jpg"
                 layout="fill"
                 objectFit="contain"
                 objectPosition="center"
@@ -227,7 +260,7 @@ export default function Home() {
           ) : (
             <div className="w-full h-[275px] relative border-4 border-[#baa7b0]">
               <Image
-                src="/hybrid-3.jpg"
+                src="/volume-2.jpg"
                 layout="fill"
                 objectFit="contain"
                 objectPosition="center"

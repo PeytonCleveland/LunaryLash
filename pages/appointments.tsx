@@ -1,68 +1,42 @@
 import { useState, useEffect } from "react";
-import Image from "next/image";
-import { AppointmentCard, ServiceCard, Tab, Tabs } from "../components";
+import {
+  AppointmentCard,
+  CheckoutForm,
+  ServiceCard,
+  Tab,
+  Tabs,
+} from "../components";
 import Calendar from "react-calendar";
-
-const services = {
-  sets: [
-    {
-      id: "classic-set",
-      name: "Classic set",
-      duration: "1h 30m",
-      price: 110,
-    },
-    {
-      id: "hybrid-set",
-      name: "Hybrid set",
-      duration: "1h 45m",
-      price: 125,
-    },
-    {
-      id: "volume-set",
-      name: "Volume set",
-      duration: "2h",
-      price: 145,
-    },
-  ],
-  fills: [
-    {
-      id: "classic-fill",
-      name: "Classic fill",
-      duration: "30m",
-      price: 35,
-    },
-    {
-      id: "hybrid-fill",
-      name: "Hybrid fill",
-      duration: "45m",
-      price: 45,
-    },
-    {
-      id: "volume-fill",
-      name: "Volume fill",
-      duration: "1h",
-      price: 55,
-    },
-  ],
-  other: [
-    {
-      id: "lash-lift",
-      name: "Lash lift",
-      duration: "1h",
-      price: 65,
-    },
-  ],
-};
+import { useSupabaseClient } from "@supabase/auth-helpers-react";
+import formatMinutes from "../utils/format-minutes";
+import formatDate from "../utils/format-date";
+import { Elements } from "@stripe/react-stripe-js";
+import getStripe from "../utils/get-stripe";
 
 const Appointments = () => {
+  const [services, setServices] = useState<any>(null);
   const [activeTab, setActiveTab] = useState(0);
-  const [selectedService, setSelectedService] = useState<string | null>(null);
+  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(
+    null
+  );
+  const [selectedServiceName, setSelectedServiceName] = useState<string | null>(
+    null
+  );
   const [changeTab, setChangeTab] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [openings, setOpenings] = useState<any>([]);
+  const [selectedOpening, setSelectedOpening] = useState<any>(null);
+  const [clientSecret, setClientSecret] = useState("");
+  const supabase = useSupabaseClient();
 
-  const handleServiceClick = (id: string) => {
-    setSelectedService(id);
+  const handleServiceClick = (id: string, name: string) => {
+    setSelectedServiceId(id);
+    setSelectedServiceName(name);
+    setChangeTab(1);
+  };
+
+  const handleOpeningClick = (time: string) => {
+    setSelectedOpening(time);
     setChangeTab(1);
   };
 
@@ -83,15 +57,56 @@ const Appointments = () => {
   }, [activeTab]);
 
   useEffect(() => {
-    async function fetchAvailability() {
-      if (selectedDate) {
-        const res = await fetch(`/api/appointments?date=${selectedDate}`);
-        const data = await res.json();
-        setOpenings(data.openings);
+    const fetchServices = async () => {
+      const { data, error } = await supabase
+        .from("services")
+        .select("id, name, cost, time, category");
+      if (error) {
+        console.log(error);
+      } else {
+        setServices(data);
       }
-    }
-    fetchAvailability();
-  }, [selectedDate]);
+    };
+
+    fetchServices();
+  }, [supabase]);
+
+  useEffect(() => {
+    const fetchOpenings = async () => {
+      if (selectedDate === null) return;
+      const { data, error } = await supabase
+        .from("appointments")
+        .select("time")
+        .eq("date", selectedDate.toISOString().split("T")[0]);
+      if (error) {
+        console.log(error);
+      } else {
+        setOpenings(data);
+      }
+    };
+
+    fetchOpenings();
+  }, [selectedDate, supabase]);
+
+  useEffect(() => {
+    if (activeTab !== 2) return;
+    fetch("/api/create-payment-intent", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ items: [{ id: selectedServiceId }] }),
+    })
+      .then((res) => res.json())
+      .then((data) => setClientSecret(data.clientSecret));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [activeTab]);
+
+  const appearance = {
+    theme: "stripe",
+  };
+  const options: any = {
+    clientSecret,
+    appearance,
+  };
 
   return (
     <>
@@ -107,8 +122,13 @@ const Appointments = () => {
               changeTab={changeTab}
             >
               <Tab label="Service" />
-              <Tab label="Date" disabled={selectedService === null} />
-              <Tab label="Payment" disabled />
+              <Tab label="Date" disabled={selectedServiceId === null} />
+              <Tab
+                label="Payment"
+                disabled={
+                  selectedServiceId === null || selectedOpening === null
+                }
+              />
             </Tabs>
           </div>
           <div className="w-full relative pb-12">
@@ -118,54 +138,75 @@ const Appointments = () => {
               }`}
             >
               <div className="flex flex-col w-full gap-2.5">
-                <h5 className="font-secondary-bold text-xl">Sets</h5>
-                {services.sets.map((service) => (
-                  <ServiceCard
-                    key={service.id}
-                    id={service.id}
-                    name={service.name}
-                    duration={service.duration}
-                    price={service.price}
-                    selected={selectedService === service.id}
-                    onClick={(id) => handleServiceClick(id)}
-                  />
-                ))}
+                <h5 className="font-primary">Sets</h5>
+                {services?.map((service: any) => {
+                  if (service.category !== "SETS") return null;
+                  return (
+                    <ServiceCard
+                      key={service.id}
+                      id={service.id}
+                      name={service.name}
+                      duration={formatMinutes(service.time)}
+                      price={service.cost}
+                      selected={selectedServiceId === service.id}
+                      onClick={() =>
+                        handleServiceClick(service.id, service.name)
+                      }
+                    />
+                  );
+                })}
               </div>
               <div className="flex flex-col w-full gap-2.5">
                 <h5 className="font-primary">Fills</h5>
-                {services.fills.map((service) => (
-                  <ServiceCard
-                    key={service.id}
-                    id={service.id}
-                    name={service.name}
-                    duration={service.duration}
-                    price={service.price}
-                    selected={selectedService === service.id}
-                    onClick={(id) => handleServiceClick(id)}
-                  />
-                ))}
+                {services?.map((service: any) => {
+                  if (service.category !== "FILLS") return null;
+                  return (
+                    <ServiceCard
+                      key={service.id}
+                      id={service.id}
+                      name={service.name}
+                      duration={formatMinutes(service.time)}
+                      price={service.cost}
+                      selected={selectedServiceId === service.id}
+                      onClick={() =>
+                        handleServiceClick(service.id, service.name)
+                      }
+                    />
+                  );
+                })}
               </div>
-              <h5 className="font-primary">Other</h5>
-              {services.other.map((service) => (
-                <ServiceCard
-                  key={service.id}
-                  id={service.id}
-                  name={service.name}
-                  duration={service.duration}
-                  price={service.price}
-                  selected={selectedService === service.id}
-                  onClick={(id) => handleServiceClick(id)}
-                />
-              ))}
+              <div className="flex flex-col w-full gap-2.5">
+                <h5 className="font-primary">Other</h5>
+                {services?.map((service: any) => {
+                  if (service.category !== "OTHER") return null;
+                  return (
+                    <ServiceCard
+                      key={service.id}
+                      id={service.id}
+                      name={service.name}
+                      duration={formatMinutes(service.time)}
+                      price={service.cost}
+                      selected={selectedServiceId === service.id}
+                      onClick={() =>
+                        handleServiceClick(service.id, service.name)
+                      }
+                    />
+                  );
+                })}
+              </div>
             </div>
             <div
               className={`flex flex-col absolute top-0 w-full gap-6 transition-all duration-500 ease-in-out ${
-                activeTab === 1 ? "left-0" : "left-[110%]"
+                activeTab === 1
+                  ? "left-0"
+                  : activeTab === 0
+                  ? "left-[110%]"
+                  : "-left-[110%]"
               }`}
             >
               <div className="flex flex-col w-full gap-2.5">
                 <Calendar
-                  tileDisabled={({ date }): any => date.getDate() === 2}
+                  tileDisabled={({ date }): any => date.getDay() % 7 === 0}
                   showNeighboringMonth={false}
                   prev2Label={null}
                   next2Label={null}
@@ -180,7 +221,11 @@ const Appointments = () => {
                 {selectedDate ? (
                   openings.length > 0 ? (
                     openings.map((opening: any, index: number) => (
-                      <AppointmentCard key={index} time={opening.time} />
+                      <AppointmentCard
+                        key={index}
+                        time={opening.time}
+                        onClick={handleOpeningClick}
+                      />
                     ))
                   ) : (
                     <p className="font-primary font-light text-center items-center text-sm text-[#2a2b2a] flex gap-3 p-5 bg-yellow-100">
@@ -207,6 +252,37 @@ const Appointments = () => {
                   </p>
                 )}
               </div>
+            </div>
+
+            <div
+              className={`flex flex-col absolute top-0 w-full gap-6 transition-all duration-500 ease-in-out ${
+                activeTab === 2 ? "left-0" : "left-[110%]"
+              }`}
+            >
+              <div className="flex flex-col w-full gap-2.5">
+                <h4 className="font-primary text-lg text-center bg-[#2a2b2a] py-2.5 text-white">
+                  Appointment details
+                </h4>
+                <div className="flex flex-col gap-3 mt-3">
+                  <p className="font-primary text-sm">{selectedServiceName}</p>
+                  <p className="font-primary text-sm">
+                    {selectedDate && formatDate(selectedDate)}
+                  </p>
+                  <p className="font-primary text-sm">{selectedOpening}</p>
+                </div>
+              </div>
+              <h4 className="font-primary text-lg text-center bg-[#2a2b2a] py-2.5 text-white">
+                Payment information
+              </h4>
+              {clientSecret && (
+                <Elements options={options} stripe={getStripe()}>
+                  <CheckoutForm
+                    date={selectedDate!}
+                    time={selectedOpening}
+                    service={selectedServiceName!}
+                  />
+                </Elements>
+              )}
             </div>
           </div>
         </div>
