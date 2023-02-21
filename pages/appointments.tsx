@@ -22,21 +22,29 @@ const Appointments = () => {
   const [selectedServiceName, setSelectedServiceName] = useState<string | null>(
     null
   );
+  const [selectedServiceCost, setSelectedServiceCost] = useState<number | null>(
+    null
+  );
   const [changeTab, setChangeTab] = useState<number | null>(null);
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
   const [openings, setOpenings] = useState<any>([]);
   const [selectedOpening, setSelectedOpening] = useState<any>(null);
+  const [selectedOpeningId, setSelectedOpeningId] = useState<string | null>(
+    null
+  );
   const [clientSecret, setClientSecret] = useState("");
   const supabase = useSupabaseClient();
 
-  const handleServiceClick = (id: string, name: string) => {
+  const handleServiceClick = (id: string, name: string, cost: number) => {
     setSelectedServiceId(id);
     setSelectedServiceName(name);
+    setSelectedServiceCost(cost);
     setChangeTab(1);
   };
 
-  const handleOpeningClick = (time: string) => {
+  const handleOpeningClick = (id: string, time: string) => {
     setSelectedOpening(time);
+    setSelectedOpeningId(id);
     setChangeTab(1);
   };
 
@@ -76,8 +84,9 @@ const Appointments = () => {
       if (selectedDate === null) return;
       const { data, error } = await supabase
         .from("appointments")
-        .select("time")
-        .eq("date", selectedDate.toISOString().split("T")[0]);
+        .select("id, time")
+        .eq("date", selectedDate.toISOString().split("T")[0])
+        .eq("is_booked", false);
       if (error) {
         console.log(error);
       } else {
@@ -150,7 +159,11 @@ const Appointments = () => {
                       price={service.cost}
                       selected={selectedServiceId === service.id}
                       onClick={() =>
-                        handleServiceClick(service.id, service.name)
+                        handleServiceClick(
+                          service.id,
+                          service.name,
+                          service.cost
+                        )
                       }
                     />
                   );
@@ -169,7 +182,11 @@ const Appointments = () => {
                       price={service.cost}
                       selected={selectedServiceId === service.id}
                       onClick={() =>
-                        handleServiceClick(service.id, service.name)
+                        handleServiceClick(
+                          service.id,
+                          service.name,
+                          service.cost
+                        )
                       }
                     />
                   );
@@ -188,7 +205,11 @@ const Appointments = () => {
                       price={service.cost}
                       selected={selectedServiceId === service.id}
                       onClick={() =>
-                        handleServiceClick(service.id, service.name)
+                        handleServiceClick(
+                          service.id,
+                          service.name,
+                          service.cost
+                        )
                       }
                     />
                   );
@@ -224,7 +245,9 @@ const Appointments = () => {
                       <AppointmentCard
                         key={index}
                         time={opening.time}
-                        onClick={handleOpeningClick}
+                        onClick={() =>
+                          handleOpeningClick(opening.id, opening.time)
+                        }
                       />
                     ))
                   ) : (
@@ -264,6 +287,7 @@ const Appointments = () => {
                   Appointment details
                 </h4>
                 <div className="flex flex-col gap-3 mt-3">
+                  <p className="font-primary text-sm">{`$${selectedServiceCost}.00`}</p>
                   <p className="font-primary text-sm">{selectedServiceName}</p>
                   <p className="font-primary text-sm">
                     {selectedDate && formatDate(selectedDate)}
@@ -277,8 +301,7 @@ const Appointments = () => {
               {clientSecret && (
                 <Elements options={options} stripe={getStripe()}>
                   <CheckoutForm
-                    date={selectedDate!}
-                    time={selectedOpening}
+                    openingId={selectedOpeningId!}
                     service={selectedServiceName!}
                   />
                 </Elements>
