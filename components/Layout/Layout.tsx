@@ -22,7 +22,7 @@ const Layout: FC<LayoutProps> = ({ children }) => {
         />
         <meta
           name="keywords"
-          content="Lash extensions, Lash lifts, Eyelash extensions, Eyelash lift, Eyelash tint, Eyelash perming, Eyelash extensions near me, Lash salon, Lash studio, Lash bar, Lash artist, Prattville lash salon, Prattville lash studio, Prattville lash bar, Prattville lash artist, Alabama lash extensions, Alabama lash lifts, Lash cleaning, Classic lashes, Volume sets"
+          content="Lash extensions, Lash lifts, Eyelash extensions, Eyelash lift, Eyelash tint, Eyelash perming, Eyelash extensions near me, Lash salon, Lash studio, Lash bar, Lash artist, Prattville lash salon, Prattville lash studio, Prattville lash bar, Prattville lash artist, Alabama lash extensions, Alabama lash lifts, Lash cleaning, Classic lashes, Volume sets, Lunary Lash, Lunar, Montgomery lash tech"
         />
         <meta name="author" content="Lunary Lash" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
