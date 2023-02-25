@@ -8,7 +8,9 @@ import formatTime from "../../../utils/format-time";
 const NewAppointment = () => {
   const router = useRouter();
   const { date: initialDate } = router.query;
-  const [date, setDate] = useState<Date>(new Date(initialDate as string));
+  const [date, setDate] = useState<Date>(
+    initialDate ? new Date(initialDate as string) : new Date()
+  );
   const [appointments, setAppointments] = useState<any>(null);
   const { register, handleSubmit } = useForm();
 
@@ -43,6 +45,8 @@ const NewAppointment = () => {
 
     await fetchAppointments();
   };
+
+  console.log(initialDate);
 
   return (
     <section className="w-full px-8 pt-24 pb-12 flex justify-center">
