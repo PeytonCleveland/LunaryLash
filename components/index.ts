@@ -1,5 +1,6 @@
 export { default as Accordion } from "./Accordion";
 export { default as AccordionItem } from "./AccordionItem";
+export { default as AdminAppointmentCard } from "./AdminAppointmentCard";
 export { default as AppointmentCard } from "./AppointmentCard";
 export { default as CheckoutForm } from "./CheckoutForm";
 export { default as Footer } from "./Footer";

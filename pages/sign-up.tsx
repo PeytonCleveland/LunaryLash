@@ -26,7 +26,7 @@ const resolver: Resolver<FormValues> = async (values) => {
   };
 };
 
-const SignIn = () => {
+const SignUp = () => {
   const [invalidCredentials, setInvalidCredentials] = useState(false);
   const {
     register,
@@ -37,7 +37,7 @@ const SignIn = () => {
   const router = useRouter();
 
   const onSubmit = handleSubmit(async (values) => {
-    const { data, error } = await supabase.auth.signInWithPassword({
+    const { data, error } = await supabase.auth.signUp({
       email: values.email,
       password: values.password,
     });
@@ -59,7 +59,7 @@ const SignIn = () => {
           </p>
         )}
         <h1 className="text-4xl font-primary font-semibold text-[#2a2b2a]">
-          Sign In
+          Sign Up
         </h1>
         <div className="flex flex-col gap-1">
           <label htmlFor="email" className="font-primary text-[#2a2b2a]">
@@ -87,11 +87,11 @@ const SignIn = () => {
           className="bg-[#2a2b2a] text-white font-primary font-semibold px-4 py-3 w-full"
           type="submit"
         >
-          Sign In
+          Sign Up
         </button>
       </form>
     </section>
   );
 };
 
-export default SignIn;
+export default SignUp;

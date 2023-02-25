@@ -3,6 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import links from "./links";
+import { useUser, useSupabaseClient } from "@supabase/auth-helpers-react";
 
 const Header = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,17 +11,24 @@ const Header = () => {
     ? "w-screen h-screen bg-[#2a2b2a] fixed top-0 right-0 transition-all duration-500 ease-in-out py-5 px-8"
     : "w-screen h-screen bg-[#2a2b2a] fixed top-0 -right-full transition-all duration-500 ease-in-out py-5 px-8";
   const router = useRouter();
+  const supabase = useSupabaseClient();
+  const user = useUser();
 
   useEffect(() => {
     setIsOpen(false);
   }, [router.pathname]);
+
+  const handleSignOut = () => {
+    supabase.auth.signOut();
+    router.push("/sign-in");
+  };
 
   return (
     <header className="w-full py-5 px-8 z-50 fixed top-0 left-0 bg-white">
       <div className={mobileNavStyles}>
         <div className="container mx-auto flex flex-col items-end">
           <div className="flex justify-between items-center w-full">
-            <Link href="/" passHref legacyBehavior>
+            <Link href={user ? "/admin" : "/"} passHref legacyBehavior>
               <a className="flex items-center gap-3">
                 <Image
                   src="/moon-white.png"
@@ -55,36 +63,60 @@ const Header = () => {
           </div>
 
           <nav className="flex flex-col gap-4 w-full text-white text-3xl mt-10 font-primary">
-            {links.map((link) => (
-              <Link href={link.href} key={link.href}>
-                {link.label}
-              </Link>
-            ))}
-            <Link href="appointments" passHref>
-              <button className="bg-white text-[#2a2b2a] px-6 py-5 flex justify-between items-center font-primary text-base mt-2 w-full">
-                Book appointment
+            {!user &&
+              links.map((link) => (
+                <Link href={link.href} key={link.href}>
+                  {link.label}
+                </Link>
+              ))}
+            {user ? (
+              <button
+                onClick={handleSignOut}
+                className="bg-white text-[#2a2b2a] px-6 py-5 flex justify-between items-center font-primary text-base mt-2 w-full"
+              >
+                Sign Out
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="none"
                   viewBox="0 0 24 24"
-                  strokeWidth={2.5}
-                  stroke="#2a2b2a"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
                   className="w-6 h-6"
                 >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
-                    d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    d="M15.75 9V5.25A2.25 2.25 0 0013.5 3h-6a2.25 2.25 0 00-2.25 2.25v13.5A2.25 2.25 0 007.5 21h6a2.25 2.25 0 002.25-2.25V15m3 0l3-3m0 0l-3-3m3 3H9"
                   />
                 </svg>
               </button>
-            </Link>
+            ) : (
+              <Link href="appointments" passHref>
+                <button className="bg-white text-[#2a2b2a] px-6 py-5 flex justify-between items-center font-primary text-base mt-2 w-full">
+                  Book appointment
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={2.5}
+                    stroke="#2a2b2a"
+                    className="w-6 h-6"
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M13.5 4.5L21 12m0 0l-7.5 7.5M21 12H3"
+                    />
+                  </svg>
+                </button>
+              </Link>
+            )}
           </nav>
         </div>
       </div>
 
       <div className="container mx-auto flex justify-between items-center">
-        <Link href="/" passHref legacyBehavior>
+        <Link href={user ? "/admin" : "/"} passHref legacyBehavior>
           <a className="flex items-center gap-3">
             <Image src="/moon.png" alt="Logo" width={30} height={30} priority />
             <h1 className="text-[#2a2b2a] font-semibold font-primary">
