@@ -128,8 +128,7 @@ const getConfirmationEmailMarkup = (
         opacity: 0;
       "
     >
-      A preheader is the short summary text that follows the subject line when
-      an email is viewed in the inbox.
+      Your Lunary Lash appointment confirmation.
     </div>
     <!-- end preheader -->
 
