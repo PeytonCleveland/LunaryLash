@@ -7,7 +7,7 @@ export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
-  const { email, openingId, service } = req.body;
+  const { email, openingId, service, name } = req.body;
 
   const supabase = createClient(
     process.env.NEXT_PUBLIC_SUPABASE_URL!,
@@ -58,6 +58,7 @@ export default async function handler(
     .update({
       is_booked: true,
       client_email: email,
+      client_name: name,
       booked_at: new Date(),
       service: serviceData[0].id,
       confirmation_number: confirmationNumber,

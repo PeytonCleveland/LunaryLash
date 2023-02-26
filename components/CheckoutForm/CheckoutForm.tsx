@@ -14,6 +14,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ openingId, service }) => {
   const stripe = useStripe();
   const elements = useElements();
 
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -66,7 +67,7 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ openingId, service }) => {
       elements,
       confirmParams: {
         // Make sure to change this to your payment completion page
-        return_url: `${baseUrl}/confirmation?openingId=${openingId}&service=${service}&email=${email}`,
+        return_url: `${baseUrl}/confirmation?openingId=${openingId}&service=${service}&email=${email}&name=${name}`,
       },
     });
 
@@ -90,6 +91,18 @@ const CheckoutForm: FC<CheckoutFormProps> = ({ openingId, service }) => {
 
   return (
     <form id="payment-form" onSubmit={handleSubmit}>
+      <label htmlFor="email" className="text-[14.88px] text-[#30313D]">
+        Name
+      </label>
+      <input
+        id="name"
+        name="name"
+        type="text"
+        className="w-full border border-[#e6e6e6] p-3 mt-0.5 text-[16px] mb-3 rounded-md font-light"
+        placeholder="Enter your name"
+        required
+        onChange={(e) => setName(e.target.value)}
+      />
       <label htmlFor="email" className="text-[14.88px] text-[#30313D]">
         Email
       </label>

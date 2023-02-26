@@ -28,7 +28,7 @@ export default function Home() {
             <br />
             With Lunary Lash
           </h1>
-          <div className="w-full h-[360px] relative overflow-hidden rounded-t-full border-[8px] border-[#2a2b2a]">
+          <div className="w-full h-[330px] relative overflow-hidden rounded-t-full border-[8px] border-[#2a2b2a]">
             <Image
               src="/hero.jpg"
               layout="fill"

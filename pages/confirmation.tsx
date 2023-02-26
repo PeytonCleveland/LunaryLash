@@ -5,7 +5,7 @@ import formatDate from "../utils/format-date";
 
 const Confirmation = () => {
   const router = useRouter();
-  const { openingId, service, email } = router.query;
+  const { openingId, service, email, name } = router.query;
   const [appointment, setAppointment] = useState<any>(null);
   const supabase = useSupabaseClient();
 
@@ -37,6 +37,7 @@ const Confirmation = () => {
           openingId,
           service,
           email,
+          name,
         }),
       });
 
@@ -47,7 +48,7 @@ const Confirmation = () => {
     if (openingId && service && email) {
       confirmAppointment();
     }
-  }, [openingId, service, email]);
+  }, [openingId, service, email, name]);
 
   return (
     <section className="w-full px-8 pt-36 pb-16 flex justify-center">
