@@ -1,16 +1,22 @@
 import { FC } from "react";
+import Link from "next/link";
 
 interface AdminAppointmentCardProps {
+  id: string;
   time: string;
   booked: boolean;
 }
 
 const AdminAppointmentCard: FC<AdminAppointmentCardProps> = ({
+  id,
   time,
   booked,
 }) => {
   return (
-    <div className="bg-[#2a2b2a] px-4 py-6 flex justify-between">
+    <Link
+      href={`/admin/manage-schedule/${id}`}
+      className="bg-[#2a2b2a] px-4 py-6 flex justify-between"
+    >
       <div className="flex gap-2">
         <svg
           xmlns="http://www.w3.org/2000/svg"
@@ -29,7 +35,7 @@ const AdminAppointmentCard: FC<AdminAppointmentCardProps> = ({
         <p className="text-white font-primary">{time}</p>
       </div>
       <p className="text-white font-primary">{booked ? "Booked" : "Open"}</p>
-    </div>
+    </Link>
   );
 };
 

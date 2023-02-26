@@ -56,6 +56,7 @@ const ManageSchedule = () => {
             {appointments.map((appointment: any, index: number) => (
               <AdminAppointmentCard
                 key={index}
+                id={appointment.id}
                 time={appointment.time}
                 booked={appointment.is_booked}
               />

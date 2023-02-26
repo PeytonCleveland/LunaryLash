@@ -46,8 +46,6 @@ const NewAppointment = () => {
     await fetchAppointments();
   };
 
-  console.log(initialDate);
-
   return (
     <section className="w-full px-8 pt-24 pb-12 flex justify-center">
       <div className="container mx-auto flex flex-col gap-6">
@@ -108,6 +106,7 @@ const NewAppointment = () => {
             {appointments.map((appointment: any, index: number) => (
               <AdminAppointmentCard
                 key={index}
+                id={appointment.id}
                 time={appointment.time}
                 booked={appointment.is_booked}
               />
