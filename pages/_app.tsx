@@ -10,16 +10,6 @@ const unbounded = Unbounded({
   subsets: ["latin"],
 });
 
-const alegreyaSans = Alegreya_Sans({
-  subsets: ["latin"],
-  weight: "400",
-});
-
-const alegreyaSansBold = Alegreya_Sans({
-  subsets: ["latin"],
-  weight: "700",
-});
-
 export default function App({
   Component,
   pageProps,
@@ -34,8 +24,6 @@ export default function App({
         {`
           :root {
             --unbounded-font: ${unbounded.style.fontFamily};
-            --alegreya-sans-font: ${alegreyaSans.style.fontFamily};
-            --alegreya-sans-font-bold: ${alegreyaSansBold.style.fontFamily};
           }
         `}
       </style>
