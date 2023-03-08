@@ -29,9 +29,15 @@ const Footer = () => {
           <div className="flex flex-col gap-2">
             <p className="text-white font-primary text-sm">Follow</p>
             <div className="flex items-center gap-2.5">
-              <Image src="/ig.png" alt="Logo" width={28} height={28} />
-              <Image src="/fb.png" alt="Logo" width={27} height={27} />
-              <Image src="/tiktok.png" alt="Logo" width={27} height={27} />
+              <a href="https://instagram.com">
+                <Image src="/ig.png" alt="Logo" width={28} height={28} />
+              </a>
+              <a href="https://facebook.com">
+                <Image src="/fb.png" alt="Logo" width={27} height={27} />
+              </a>
+              <a href="https://tiktok.com">
+                <Image src="/tiktok.png" alt="Logo" width={27} height={27} />
+              </a>
             </div>
           </div>
         </div>
